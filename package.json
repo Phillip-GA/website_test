@@ -1,0 +1,10 @@
+{
+  "name": "grigsby-advisors",
+  "version": "1.0.0",
+  "description": "Grigsby Advisors - Technical & Business Solutions Website",
+  "scripts": {
+    "build": "echo 'No build step required for static HTML'"
+  },
+  "author": "R. Phillip Grigsby",
+  "license": "ISC"
+}
