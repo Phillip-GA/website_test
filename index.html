@@ -291,82 +291,36 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Experience Section Styles */
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
+        /* Experience Section Styles - NEW GRID LAYOUT */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
         }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background-color: var(--secondary-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
-        }
-
-        .timeline-item {
-            padding: 1.5rem 2.5rem;
-            position: relative;
+        .experience-card {
             background-color: white;
-            width: calc(50% - 40px);
             border-radius: 8px;
+            overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 3rem;
+            transition: var(--transition);
+            height: 100%;
         }
 
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            background-color: white;
-            border: 4px solid var(--secondary-color);
-            border-radius: 50%;
-            top: 20px;
-            z-index: 1;
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
 
-        .left {
-            left: 0;
+        .experience-card-header {
+            padding: 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
         }
 
-        .right {
-            left: 50%;
-        }
-
-        .left::after {
-            right: -12.5px;
-        }
-
-        .right::after {
-            left: -12.5px;
-        }
-
-        .timeline-date {
-            color: var(--secondary-color);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-content h3 {
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        .timeline-content h4 {
-            margin-bottom: 1rem;
-            color: var(--text-color);
-            font-weight: normal;
-            font-style: italic;
-        }
-
-        .company-logo {
-            position: absolute;
+        .experience-logo {
             width: 60px;
             height: 60px;
             background-color: white;
@@ -374,24 +328,36 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-right: 1rem;
             overflow: hidden;
         }
 
-        .left .company-logo {
-            right: -70px;
-            top: 5px;
-        }
-
-        .right .company-logo {
-            left: -70px;
-            top: 5px;
-        }
-
-        .company-logo img {
+        .experience-logo img {
             width: 80%;
             height: auto;
             object-fit: contain;
+        }
+
+        .experience-card-body {
+            padding: 1.5rem;
+        }
+
+        .experience-date {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .experience-card h4 {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-color);
         }
 
         /* Education Section */
@@ -538,7 +504,7 @@
         /* Skills Section */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
 
@@ -583,11 +549,27 @@
             left: 0;
         }
 
-        /* Contact Section */
+        /* Contact Section - UPDATED */
         .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .contact-info {
+            text-align: left;
+        }
+
+        .contact-image {
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
+        }
+
+        .contact-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-height: 400px;
         }
 
         /* Footer Styles */
@@ -649,36 +631,17 @@
         /* Responsive Styles */
         @media (max-width: 992px) {
             .about-grid,
-            .skills-container,
-            .education-grid {
+            .contact-container {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
             
+            .skills-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .about-img {
                 order: -1;
-            }
-            
-            .timeline::before {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: calc(100% - 80px);
-                padding: 1.5rem;
-                left: 80px;
-            }
-            
-            .timeline-item::after {
-                left: -12.5px;
-                right: auto;
-            }
-            
-            .left .company-logo,
-            .right .company-logo {
-                left: -70px;
-                right: auto;
-                top: 5px;
             }
         }
 
@@ -729,6 +692,10 @@
             
             .section-title {
                 font-size: 2rem;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -874,64 +841,87 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Experience Section - NEW GRID LAYOUT -->
     <section id="experience" class="experience">
         <div class="container">
             <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="company-logo">
-                        <img src="grigsby-advisors-logo.jpg" alt="Grigsby Advisors Logo" />
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-card-header">
+                        <div class="experience-logo">
+                            <img src="grigsby-advisors-logo.png" alt="Grigsby Advisors Logo" />
+                        </div>
+                        <div>
+                            <h3>Grigsby Advisors LLC</h3>
+                        </div>
                     </div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Jul 2024 - Present</div>
-                        <h3>Founder & Principal</h3>
-                        <h4>Grigsby Advisors LLC</h4>
-                        <p>Provide IT and general business consultation for various business partners, from start-ups to larger operations. Deliver high-impact automations and process optimizations, currently working in the digital infrastructure real estate sector.</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="company-logo">
-                        <img src="c3-ai-logo.png" alt="C3 AI Logo" />
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Oct 2022 - Nov 2023</div>
-                        <h3>Senior AI Manager – Federal</h3>
-                        <h4>C3 AI</h4>
-                        <p>Collaborated with DoD, IC and federal agencies to design, build and deliver production-ready AI applications in 3-6-month pilots. Led teams of data scientists, engineers, and industry experts to rapidly deliver value while demonstrating potential for scaling future use-cases.</p>
+                    <div class="experience-card-body">
+                        <div class="experience-date">Jul 2024 - Present</div>
+                        <h4>Founder & Principal</h4>
+                        <p>Provide IT and general business consultation for various business partners, from start-ups to large corporations. Deliver high-impact automations and process improvements to teams in need.</p>
                     </div>
                 </div>
-                <div class="timeline-item left">
-                    <div class="company-logo">
-                        <img src="united-airlines-logo.png" alt="United Airlines Logo" />
+                
+                <div class="experience-card">
+                    <div class="experience-card-header">
+                        <div class="experience-logo">
+                            <img src="c3-ai-logo.png" alt="C3 AI Logo" />
+                        </div>
+                        <div>
+                            <h3>C3 AI</h3>
+                        </div>
                     </div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Feb 2021 - Nov 2022</div>
-                        <h3>Analytics Manager – Data Engineering</h3>
-                        <h4>United Airlines</h4>
-                        <p>Developed, optimized, and maintained crucial data pipelines serving thousands of internal users across commercial, digital, and corporate verticals. Coordinated development between business users and engineering teams while supporting migration to cloud solutions.</p>
+                    <div class="experience-card-body">
+                        <div class="experience-date">Oct 2022 - Nov 2023</div>
+                        <h4>Senior AI Manager – Federal</h4>
+                        <p>Collaborated with DoD, IC and federal agencies to design, build and deliver production-ready AI applications in 3-6-month pilots. Led teams of data scientists, engineers, and industry experts to rapidly deliver value.</p>
                     </div>
                 </div>
-                <div class="timeline-item right">
-                    <div class="company-logo">
-                        <img src="frontier-airlines-logo.png" alt="Frontier Airlines Logo" />
+                
+                <div class="experience-card">
+                    <div class="experience-card-header">
+                        <div class="experience-logo">
+                            <img src="united-airlines-logo.png" alt="United Airlines Logo" />
+                        </div>
+                        <div>
+                            <h3>United Airlines</h3>
+                        </div>
                     </div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Aug 2018 - Nov 2020</div>
-                        <h3>Product Analyst – Commercial</h3>
-                        <h4>Frontier Airlines</h4>
-                        <p>Designed and deployed Ancillary Pricing Optimization and Advanced Retail Analytics solutions to dynamically price ancillaries with customer centricity as a focus. Managed 3rd party products and supported data-driven initiatives across marketing, loyalty, and customer analytics.</p>
+                    <div class="experience-card-body">
+                        <div class="experience-date">Feb 2021 - Nov 2022</div>
+                        <h4>Analytics Manager – Data Engineering</h4>
+                        <p>Developed, optimized, and maintained crucial data pipelines serving thousands of internal users across commercial, digital, and corporate verticals. Coordinated development between business users and engineering teams.</p>
+                    </div>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-card-header">
+                        <div class="experience-logo">
+                            <img src="frontier-airlines-logo.png" alt="Frontier Airlines Logo" />
+                        </div>
+                        <div>
+                            <h3>Frontier Airlines</h3>
+                        </div>
+                    </div>
+                    <div class="experience-card-body">
+                        <div class="experience-date">Aug 2018 - Nov 2020</div>
+                        <h4>Product Analyst – Commercial</h4>
+                        <p>Designed and deployed Ancillary Pricing Optimization and Advanced Retail Analytics solutions to dynamically price ancillaries with customer centricity as a focus. Managed 3rd party products and supported data-driven initiatives.</p>
                     </div>
                 </div>
 
-                <div class="timeline-item left">
-                    <div class="company-logo">
-                        <img src="us-army-logo.png" alt="US Army Logo" />
+                <div class="experience-card">
+                    <div class="experience-card-header">
+                        <div class="experience-logo">
+                            <img src="us-army-logo.png" alt="US Army Logo" />
+                        </div>
+                        <div>
+                            <h3>United States Army</h3>
+                        </div>
                     </div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Aug 2012 - Aug 2020</div>
-                        <h3>Communication Security – COMSEC</h3>
-                        <h4>United States Army</h4>
+                    <div class="experience-card-body">
+                        <div class="experience-date">Aug 2012 - Aug 2020</div>
+                        <h4>Communication Security – COMSEC</h4>
                         <p>Engaged in multinational exercises and supported missions with foreign allies, supporting operations across the globe.</p>
                     </div>
                 </div>
@@ -1014,7 +1004,7 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills Section - UPDATED WITH CERTIFICATIONS -->
     <section id="skills" class="skills">
         <div class="container">
             <h2 class="section-title">Skills & Expertise</h2>
@@ -1046,26 +1036,47 @@
                         <li>Project Management</li>
                     </ul>
                 </div>
+                <div class="skills-box">
+                    <h3>Certifications</h3>
+                    <ul class="skills-list">
+                        <!-- Replace these with your actual LinkedIn certifications -->
+                        <li>Text Mining & Analytics - University of Illinois Urbana-Champaign</li>
+                        <li>Python Specialization - University of Michigan</li>
+                        <li>Business & Financial Modeling Specialization - Wharton Online</li>
+                        <li>Writing In The Sciences - Stanford Online</li>
+                        <li>AI For Everyone - DeepLearning.AI</li>
+                        <li>UX Design Fundamentals - California Institute of the Arts</li>
+                        <li>UX Design - University of Michigan</li>
+                        <li>Innovation Through Design - University of Sydney</li>
+                        <li>Google Analytics</li>
+                        <li>Google AdWords</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section - UPDATED -->
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">Connect With Me</h2>
             <div class="contact-container">
-                <h3 style="margin-bottom: 2rem; color: var(--primary-color);">Let's Discuss Your Business Challenges</h3>
-                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Ready to transform your business? Connect with me on LinkedIn to start a conversation about how we can collaborate to achieve your goals.</p>
-                <a href="https://www.linkedin.com/in/richardpgrigsby/" target="_blank" style="display: inline-block; background-color: #0077B5; color: white; padding: 1rem 2rem; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">
-                    <span style="display: inline-block; vertical-align: middle; margin-right: 10px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </span>
-                    Connect on LinkedIn
-                </a>
-                <p style="margin-top: 2rem; font-size: 1.1rem;">
-                    Contact me via LinkedIn for consulting inquiries.
-                </p>
+                <div class="contact-info">
+                    <h3 style="margin-bottom: 2rem; color: var(--primary-color);">Let's Discuss Your Business Challenges</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 2rem;">Ready to transform your business? Connect with me on LinkedIn to start a conversation about how we can collaborate to achieve your goals.</p>
+                    <a href="https://www.linkedin.com/in/richardpgrigsby/" target="_blank" style="display: inline-block; background-color: #0077B5; color: white; padding: 1rem 2rem; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">
+                        <span style="display: inline-block; vertical-align: middle; margin-right: 10px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </span>
+                        Connect on LinkedIn
+                    </a>
+                    <p style="margin-top: 2rem; font-size: 1.1rem;">
+                        Contact me via LinkedIn for consulting inquiries.
+                    </p>
+                </div>
+                <div class="contact-image">
+                    <img src="contact_me_image.jpg" alt="R. Phillip Grigsby - Contact Me" />
+                </div>
             </div>
         </div>
     </section>
